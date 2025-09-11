@@ -1,0 +1,121 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #000000 0%, #0d1b2a 100%);
+    --bg-dark-blue: #0d1b2a;
+    --text-light: #e0e1dd;
+    --text-dark: #778da9;
+    --accent-blue: #415a77;
+    --accent-red: #1100ff; /* New Red Accent */
+    --accent-gradient: linear-gradient(90deg, #1b263b, #415a77);
+    --font-sans: 'Poppins', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    background-image: var(--bg-gradient);
+    background-attachment: fixed; /* Makes the gradient stay in place on scroll */
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+h2, h3, h4 { color: var(--text-light); }
+section { padding: 6rem 0; }
+
+/* --- Components --- */
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    background: var(--accent-gradient);
+    border: none;
+    color: var(--text-light);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(65, 90, 119, 0.4); }
+
+/* --- Header --- */
+.site-header { position: sticky; top: 0; background: rgba(0,0,0, 0.85); backdrop-filter: blur(10px); padding: 1rem 0; z-index: 100; }
+.site-header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--text-light); }
+.main-nav a { color: var(--text-dark); text-decoration: none; margin-left: 1.5rem; }
+.main-nav a:hover { color: var(--accent-red); } /* Red accent on hover */
+
+/* --- Section Titles --- */
+section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
+.section-number { color: var(--accent-red); font-weight: 400; margin-right: 0.5rem; } /* Red accent for numbers */
+
+/* --- Hero --- */
+.hero { min-height: 90vh; display: flex; align-items: center; background: transparent; }
+.hero-intro { color: var(--accent-blue); font-size: 1.1rem; margin-bottom: 1rem; }
+.hero-name { font-size: 4rem; margin-bottom: 0.5rem; line-height: 1.1; }
+.hero-tagline { font-size: 3rem; color: var(--text-dark); line-height: 1.1; margin-bottom: 1.5rem; }
+.hero-description { max-width: 60ch; margin-bottom: 2rem; }
+
+/* --- About --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.about-info h4, .certifications-info h4 {
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+}
+
+.education-list {
+    list-style-type: none;
+}
+
+.education-list li {
+    margin-bottom: 1rem;
+}
+
+.education-list span {
+    display: block;
+    color: var(--text-dark);
+}
+
+/* --- Projects --- */
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.project-card { background: var(--bg-dark-blue); padding: 2rem; border-radius: 8px; border-left: 4px solid; border-image: var(--accent-gradient) 1; }
+.project-card h3 { margin-bottom: 1rem; }
+.project-tech { margin-top: 1.5rem; display: flex; gap: 0.5rem; }
+.project-tech span { background: var(--accent-blue); color: var(--bg-dark-blue); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 500; }
+
+/* --- Skills --- */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.skills-grid h4 { color: var(--accent-blue); margin-bottom: 1rem; }
+.skills-list { list-style: none; }
+.skills-list li { background: var(--bg-dark-blue); padding: 0.5rem 1rem; margin-bottom: 0.5rem; border-radius: 4px; }
+
+/* --- Contact --- */
+.contact-section { text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
+.contact-subtitle { margin-bottom: 2rem; }
+.contact-form { display: grid; gap: 1.5rem; text-align: left; }
+.contact-form input, .contact-form textarea { width: 100%; padding: 1rem; background-color: var(--bg-dark-blue); border: 1px solid var(--accent-blue); border-radius: 4px; color: var(--text-light); font-family: inherit; font-size: 1rem; }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent-red); } /* Red accent on focus */
+.form-status { margin-top: 1rem; font-weight: 500; }
+
+/* --- Footer Social Links --- */
+.social-links {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.social-links a {
+    color: var(--text-dark);
+    font-size: 2.5rem;
+    transition: all 0.10s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-red);
+    transform: translateY(-3px);
+}
