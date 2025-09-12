@@ -1,11 +1,24 @@
 services:
   - type: web
-    name: gangadharhIngle_portfolio
-    runtime: java  # This is the line that forces the Java environment
-    buildCommand: "mvnw clean package -DskipTests"
+    name: gangadharhingle-portfolio
+    runtime: java
+    buildCommand: "./mvnw clean package -DskipTests"
     startCommand: "java -jar target/portfolio-1.0.0.jar"
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: portfolio-database # Use the name of your Render database here
+          name: portfolio-database
           property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: portfolio-database
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: portfolio-database
+          property: password
+
+databases:
+  - name: portfolio-database
+    databaseName: portfolio_db
+    user: portfolio_user
