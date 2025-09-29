@@ -3,26 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
-    // Assuming you are using <button type="button"> now
-    const sendButton = contactForm.querySelector('button[type="button"]');
+    const sendButton = contactForm.querySelector('button[type="submit"]');
 
-    let isSubmitting = false;
+    let isSubmitting = false; // <<< 1. NEW FLAG
 
-    // Use the button's click event to trigger the submission logic
-    sendButton.addEventListener('click', async (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        if (!contactForm.checkValidity()) {
-            contactForm.reportValidity();
-            return;
+        if (isSubmitting) { // <<< 2. CHECK FLAG
+            return; // Ignore the second click
         }
 
-        if (isSubmitting) {
-            return;
-        }
-
-        isSubmitting = true;
-        sendButton.disabled = true;
+        isSubmitting = true; // Set flag to true
+        sendButton.disabled = true; // Disable button visually
 
         formStatus.textContent = 'Sending...';
         formStatus.style.color = 'var(--text-light)';
@@ -33,11 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
             message: document.getElementById('message').value,
         };
 
-        // **FIX HERE: DECLARE RESPONSE OUTSIDE TRY/CATCH**
-        let response = null;
-
         try {
-            response = await fetch('/api/contact', {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -47,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 formStatus.textContent = 'Message sent successfully! Thank you.';
                 formStatus.style.color = '#415a77';
                 contactForm.reset();
-                // We DON'T reset isSubmitting here on purpose (keeps button disabled)
             } else {
                 throw new Error('Server responded with an error.');
             }
@@ -56,8 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
             formStatus.textContent = 'An error occurred. Please try again.';
             formStatus.style.color = '#ff4f4f';
 
+            // Re-enable button and reset flag only on failure
             sendButton.disabled = false;
-            isSubmitting = false;
+        } finally {
+            // 3. Reset flag AFTER the entire process finishes (except on success, where we keep button disabled)
+            if (!response?.ok) {
+                isSubmitting = false;
+            }
         }
     });
 });
