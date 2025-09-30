@@ -11,7 +11,6 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    // Your email address (gingale763@gmail.com)
     @Value("${portfolio.email.recipient}")
     private String recipientEmail;
 
@@ -19,12 +18,13 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
-    // --- 1. ADMIN NOTIFICATION (Already working) ---
+    // --- 1. ADMIN NOTIFICATION ---
     public void sendNewContactMessage(Contact contact) {
         SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom(recipientEmail); // Sent from your address
-        message.setTo(recipientEmail);   // Sent to your address
+        // Must match spring.mail.username in application.properties
+        message.setFrom(recipientEmail);
+        message.setTo(recipientEmail);
         message.setSubject("NEW PORTFOLIO CONTACT: " + contact.getName());
 
         String emailBody = String.format(
@@ -40,22 +40,18 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    // --- 2. USER AUTO-REPLY (NEW METHOD) ---
+    // --- 2. USER AUTO-REPLY ---
     public void sendAutoReply(Contact contact) {
         SimpleMailMessage autoReply = new SimpleMailMessage();
 
-        // Sent from your address (reply to will be your address)
         autoReply.setFrom(recipientEmail);
+        autoReply.setTo(contact.getEmail()); // Send to the user's email
 
-        // Sent TO the user who just filled the form
-        autoReply.setTo(contact.getEmail());
-
-        // Personalized subject line
-        autoReply.setSubject("Thanks for contacting with Me..!");
+        autoReply.setSubject("Thanks for contacting Gangadhar Ingle!");
 
         String replyBody = String.format(
                 "Dear %s,\n\n" +
-                        "Thank you for reaching out to me! I have received your message and will review it shortly. I aim to reply to all inquiries within 24 hours.\n\n" +
+                        "Thank you for reaching out to me! I have received your message and will review it shortly. I aim to reply to all inquiries within 24-48 hours.\n\n" +
                         "Here is a copy of the message you sent:\n" +
                         "------------------------------------\n" +
                         "%s\n" +
