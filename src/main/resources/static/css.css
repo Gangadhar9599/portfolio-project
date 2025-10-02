@@ -101,7 +101,7 @@ section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
 .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent-red); } /* Red accent on focus */
 .form-status { margin-top: 1rem; font-weight: 500; }
 
-/* --- Footer Social Links --- */
+/* --- Footer Social Links (Desktop Styles) --- */
 .social-links {
     margin-bottom: 1rem;
     display: flex;
@@ -120,7 +120,10 @@ section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
     transform: translateY(-3px);
 }
 
-/* --- Mobile/Tablet Styles: Applies when screen is 768px wide or smaller --- */
+/* ------------------------------------------------ */
+/* --- RESPONSIVE MOBILE STYLES (768px and down) ---*/
+/* ------------------------------------------------ */
+
 @media (max-width: 768px) {
 
     /* 1. Global/Header Adjustments */
@@ -134,7 +137,7 @@ section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
     .main-nav {
         margin-top: 1rem; /* Add space below the logo */
         display: flex;
-        flex-wrap: wrap; /* Allow links to wrap if necessary */
+        flex-wrap: wrap;
         justify-content: center;
     }
     .main-nav a {
@@ -143,14 +146,14 @@ section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
 
     /* 2. Hero Section Adjustments */
     .hero {
-        min-height: auto; /* Allow height to collapse */
+        min-height: auto;
         padding: 4rem 0;
     }
     .hero-name {
-        font-size: 3rem; /* Reduce size of main name */
+        font-size: 3rem;
     }
     .hero-tagline {
-        font-size: 2rem; /* Reduce size of tagline */
+        font-size: 2rem;
     }
 
     /* 3. Grid Section Stacking (About, Projects, Skills) */
@@ -170,5 +173,22 @@ section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
     .skills-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+
+    /* 4. Footer Social Links Fix (Ensures visibility) */
+    .social-links {
+        gap: 1.5rem;
+        padding-top: 1rem;
+    }
+    .social-links a {
+        font-size: 2rem; /* Keep them large enough to see */
+        min-width: 2rem; /* Prevent collapse if content is missing */
+        display: inline-block; /* Ensure they render correctly */
+    }
+    /* Explicitly target the Font Awesome icons for rendering */
+    .social-links a i {
+        /* This is a fallback/fix that sometimes forces icon fonts to load */
+        font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free", sans-serif;
+        font-size: 2rem;
     }
 }
