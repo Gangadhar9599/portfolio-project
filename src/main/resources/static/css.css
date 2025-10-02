@@ -119,3 +119,56 @@ section h2 { font-size: 2rem; margin-bottom: 2.5rem; }
     color: var(--accent-red);
     transform: translateY(-3px);
 }
+
+/* --- Mobile/Tablet Styles: Applies when screen is 768px wide or smaller --- */
+@media (max-width: 768px) {
+
+    /* 1. Global/Header Adjustments */
+    .container {
+        padding: 0 1rem; /* Reduce side padding */
+    }
+    .site-header .container {
+        flex-direction: column; /* Stack logo and navigation vertically */
+        text-align: center;
+    }
+    .main-nav {
+        margin-top: 1rem; /* Add space below the logo */
+        display: flex;
+        flex-wrap: wrap; /* Allow links to wrap if necessary */
+        justify-content: center;
+    }
+    .main-nav a {
+        margin: 0.5rem 0.5rem; /* Better spacing for stacked links */
+    }
+
+    /* 2. Hero Section Adjustments */
+    .hero {
+        min-height: auto; /* Allow height to collapse */
+        padding: 4rem 0;
+    }
+    .hero-name {
+        font-size: 3rem; /* Reduce size of main name */
+    }
+    .hero-tagline {
+        font-size: 2rem; /* Reduce size of tagline */
+    }
+
+    /* 3. Grid Section Stacking (About, Projects, Skills) */
+
+    /* About Section: Two columns stack into one */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Projects Section: Two columns stack into one */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Skills Section: Three columns stack into one */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
